@@ -3,19 +3,24 @@ import os
 
 base_folder = 'data'
 base_file_name = 'aoc_data_{}.txt'
+base_testfile_name = 'aoc_data_{}_test.txt'
 
-def get_location(day):
+def get_location(day, test=False):
 
-    p = Path(os.path.join(base_folder, base_file_name.format(day)))
+    if test==True:
+        p = Path(os.path.join(base_folder, base_testfile_name.format(day)))
+    else:
+        p = Path(os.path.join(base_folder, base_file_name.format(day)))
+
     if p.exists():
         return p
     else:
         raise ValueError('file: {} not found.'.format(p))
 
 
-def read_data(day):
+def read_data(day, test=False):
 
-    p = get_location(day)
+    p = get_location(day, test)
 
     with open(p) as f:
         content = f.readlines()
