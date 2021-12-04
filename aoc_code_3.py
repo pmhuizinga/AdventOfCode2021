@@ -28,7 +28,7 @@ print(gamma_rate * epsilon_rate)
 
 
 # part 2
-def get_oxygen_generator_rating(mc=True):
+def get_rating(mc=True):
 
     def bin_to_int(arr):
         string = ''
@@ -54,8 +54,8 @@ def get_oxygen_generator_rating(mc=True):
     return bin_to_int(arr_new)
 
 
-oxi = get_oxygen_generator_rating(mc=True)
-co2 = get_oxygen_generator_rating(mc=False)
+oxi = get_rating(mc=True)
+co2 = get_rating(mc=False)
 print('part 2')
 print(oxi * co2)
 
