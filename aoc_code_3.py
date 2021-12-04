@@ -29,22 +29,27 @@ print(gamma_rate * epsilon_rate)
 
 # part 2
 def get_rating(mc=True):
+
+    def bin_to_int(arr):
+        string = ''
+        for val in list(arr[0]):
+            string = string + str(val)
+        return int(string, 2)
+
     arr_new = data
 
     for col in range(arr_new.shape[1]):
         if arr_new.shape[0] == 1:
-            return int("".join(list([str(x) for x in arr_new[0]])), 2)
+            return bin_to_int(arr_new)
 
         most_common = int(math.ceil(np.median(arr_new[:, col])))
 
-        if mc is False:
-            most_common = 1 - most_common
+        if mc is False: most_common = 1 - most_common
 
         arr_new = arr_new[arr_new[:, col] == most_common]
 
-
 oxi = get_rating(mc=True)
 co2 = get_rating(mc=False)
-
 print('part 2')
 print(oxi * co2)
+
