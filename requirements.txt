@@ -2,4 +2,5 @@ logging
 pytest
 pathlib
 numpy
+collections
 
