@@ -22,7 +22,7 @@ def lanternfish(lst, days):
 
         arr = arr - 1
         days -= 1
-        print('day: {}, arr: {}'.format(day, arr))
+        # print('day: {}, arr: {}'.format(day, arr))
 
     return list(arr)
 
@@ -31,28 +31,9 @@ def lanternfish(lst, days):
 start_num = 3
 period = 18
 print('6a:')
-result = lanternfish([start_num], period)
+result = lanternfish(data, 80)
 print('result for 6a: {}'.format(len(result)))
 
-# %%
-# nr_of_children = 0
-#
-# def calc_child(start_number: int, days: int, number_of_children: int = 0) -> int:
-#     if start_number <= days:
-#         days_remaining = days - start_number
-#         number_of_children += (math.ceil(days_remaining / 7))
-#         print(number_of_children)
-#         if days_remaining >= 7:
-#             return calc_child(8, days_remaining, number_of_children)
-#         else:
-#             return number_of_children
-#
-# print('result {}'.format(calc_child(start_num, period)))
-
-# print(sum([(1+calc_child(x, 18, 0)) for x in [3]]))
-# period - start_num = days_remaining
-# checklist.append([start_number, days, number_of_children])
-# print('startnum: {}, days_remaining: {}, nr_of_children: {}'.format(8, days_remaining, number_of_children))
 #%%
 # thanks to Pieter....
 from collections import defaultdict
