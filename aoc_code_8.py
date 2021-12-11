@@ -20,22 +20,16 @@ data = [x.split(' | ') for x in data]
 '''
 
 def count_digits(data):
-    ones = 0
-    fours = 0
-    sevens = 0
-    eights = 0
+    counter = 0
+    countlist = [2, 4, 3, 7]
     for entry in data:
         codes = entry[1].split(' ')
         for digit in codes:
-            length = len(digit)
-            if length == 2:
-                ones += 1
-            elif length == 4:
-                fours += 1
-            elif length == 3:
-                sevens += 1
-            elif length == 7:
-                eights += 1
-    return ones, fours, sevens, eights
+            if len(digit) in countlist:
+                counter += 1
 
-print(sum(count_digits(data)))
+    return counter
+
+print(count_digits(data))
+
+# part 2
