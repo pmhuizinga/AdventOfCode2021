@@ -2,9 +2,23 @@ from general_functions import read_data
 import numpy as np
 
 day = 8
-data = read_data(day, test=True)
+data = read_data(day, test=False)
 data = [x.split(' | ') for x in data]
 
+def count_digits(data):
+    counter = 0
+    countlist = [2, 4, 3, 7]
+    for entry in data:
+        codes = entry[1].split(' ')
+        for digit in codes:
+            if len(digit) in countlist:
+                counter += 1
+
+    return counter
+
+print(count_digits(data))
+
+# part 2
 '''
 	a	b	c	d	e	f	g	count
 0	1	1	1		1	1	1	6
@@ -23,40 +37,54 @@ count 3 = 7
 count 4 = 4
 count 7 = 8
 '''
-
 def count_digits(data):
-    counter = 0
-    countlist = [2, 4, 3, 7]
+    global one, entry_dict_2, four
+    output2 = 0
     for entry in data:
-        codes = entry[1].split(' ')
-        for digit in codes:
-            if len(digit) in countlist:
-                counter += 1
-
-    return counter
-
-print(count_digits(data))
-
-# part 2
-def count_digits(data):
-    counter = 0
-    countlist = [2, 4, 3, 7]
-    for entry in data:
-        codes = entry[1].split(' ')
+        entry_dict = {}
+        entry_dict_2 = {}
+        codes = entry[0].split(' ')
         # step one: get the easy digits
         for idx, digit in enumerate(codes):
             if len(digit) == 2:
-
-                print('digit is 1')
+                entry_dict[idx] = 1
+                one = digit
             elif len(digit) == 4:
-                print('digit is 4')
-            elif len(digit) == 3 :
-                print('digit is 7')
+                entry_dict[idx] = 4
+                four = digit
+            elif len(digit) == 3:
+                entry_dict[idx] = 7
             elif len(digit) == 7:
-                print('digit is 8')
-            elif len(digit) == 6:
-                for char in digit.split():
-                    'als er maar 1 waarde van de digit in 1 zit dan is het zes'
+                entry_dict[idx] = 8
 
+        # step 2: get the digits with six and five characters. Match them with the 'easy digits'.
+        for idx, digit in enumerate(codes):
+            if len(digit) == 6:
+                if sum([x in one for x in digit]) == 1:
+                    entry_dict[idx] = 6
+                elif sum([x in four for x in digit]) == 4:
+                    entry_dict[idx] = 9
+                else:
+                    entry_dict[idx] = 0
+            if len(digit) == 5:
+                if sum([x in one for x in digit]) == 2:
+                    entry_dict[idx] = 3
+                elif sum([x in four for x in digit]) == 3:
+                    entry_dict[idx] = 5
+                else:
+                    entry_dict[idx] = 2
 
-count_digits(data)
+        for idx, digit in enumerate(codes):
+            entry_dict_2[''.join(sorted(digit))] = entry_dict[idx]
+
+        output = ''
+        test = entry[1].split(' ')
+        for digit in test:
+            output = output + str(entry_dict_2[''.join(sorted(digit))])
+
+        output = int(output)
+        output2 += output
+
+    return output2
+
+print(count_digits(data))
