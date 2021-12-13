@@ -5,5 +5,7 @@ numpy
 collections
 seaborn
 matplotlib
+scipy
+
 
 
